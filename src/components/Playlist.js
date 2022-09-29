@@ -1,19 +1,25 @@
-import React, { Component } from 'react'
-import Song from './Song'
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import Song from "./Song";
 
-export default class Playlist extends Component {
-  componentDidMount() {
-  }
-  render() {
-    return (
-        <div className='w-full h-[calc(100%-7rem)] bg-playlistBg overflow-auto'>
-          <div className='text-white px-6'>
-            {
-              this.props.trackList.map(item => <Song track={item}/>)
-            }
-            <Song/>
+const Playlist = () => {
+  const playlist = useSelector((state) => state.playlist);
+  const track = useSelector((state) => state.tracklist);
+  useEffect(() => {}, [playlist, track]);
+
+  return (
+    <>
+      {playlist.playlistSongs && (
+        <div className="w-full h-[calc(100%-7rem)] bg-playlistBg overflow-auto">
+          <div className="text-white px-6">
+            {track.trackLists.map((item) => (
+              <Song track={item} />
+            ))}
           </div>
         </div>
-    )
-  }
-}
+      )}
+    </>
+  );
+};
+
+export default Playlist;
